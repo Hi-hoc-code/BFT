@@ -3,6 +3,7 @@ package com.example.bft_vietname.activity;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.bft_vietname.R;
@@ -25,8 +27,9 @@ public class HomeActivity extends AppCompatActivity {
     RecyclerView rcvIntro;
     RecycleIntroAdapter recycleIntroAdapter;
     ArrayList<Banner> listBanner;
-//    Toolbar toolbar;
-//    DrawerLayout drawerLayout;
+    ImageView btnYourAccount;
+    Toolbar toolbar;
+    DrawerLayout drawerLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,19 +46,24 @@ public class HomeActivity extends AppCompatActivity {
         listBanner.add(new Banner(R.drawable.intro,1));
         recycleIntroAdapter = new RecycleIntroAdapter(HomeActivity.this,listBanner);
         rcvIntro.setAdapter(recycleIntroAdapter);
-//        setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        btnYourAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                } else {
+                    drawerLayout.openDrawer(GravityCompat.START);
+                }
+            }
+        });
 
-//        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(HomeActivity.this,drawerLayout,toolbar,R.string.open, R.string.close);
-//        drawerToggle.setDrawerIndicatorEnabled(true);
-//        drawerToggle.syncState();
-//        drawerLayout.addDrawerListener(drawerToggle);
 
     }
     private void addControls() {
         rcvIntro = findViewById(R.id.rcvIntro);
-//        toolbar = findViewById(R.id.toolbar);
-//        drawerLayout = findViewById(R.id.drawer_layout);
+        btnYourAccount = findViewById(R.id.btnYourAccount);
+        toolbar = findViewById(R.id.toolBar);
+        drawerLayout = findViewById(R.id.drawer_layout);
 
     }
 }
